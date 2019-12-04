@@ -105,16 +105,16 @@ def check():
             return apology("must provide location")
         # Check the user in
         elif check == "in":            
+            return apology("TODO")   
             # cancel process if user is already checked into that location (figure it out)
-         # update query to add 1 to user's location
-            
+            # update query to add 1 to user's location     
         else:                       
             # cancel process if user is not already checked into that location (figure it out)
             
             # insert the transaction into the database
             # update query to subtract 1 to user's location
 
-                return redirect("/confirm")
+            return redirect("/confirm")
 
     #User reached route via GET, display form to request stock quote
     else:
