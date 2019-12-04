@@ -51,35 +51,35 @@
           ['Eliot House', 42.3703, -71.1209],
           ['Kirkland House', 42.3708 , -71.1205],
           ['Leverett House', 42.3701, -71.1174],
-          
-          
-          
-          
-          
+          ['Lowell House', 42.3720 , -71.1181],
+          ['Mather House', 42.3686, -71.1153],
+          ['Pforzheimer House', 42.3821 , -71.1248],
+          ['Quincy House', 42.3705, -71.1174],
+          ['Winthrop House', 42.3702,  -71.1191],
+          ['Cabot Library', 42.3762 , -71.1162],
+          ['Law School Library', 42.3780 , -71.1186],
+          ['Lamont Library', 42.3727, -71.1155],
+          ['Widener Library', 42.3734, -71.1165],
+          ['Capital One Cafe', 42.3727, -71.1197],
+          ['Flour Bakery', 42.3730 , -71.1225],
+          ['Peets Cafe', 42.3726 , -71.1206],
+          ['Starbucks', 42.3733 , -71.1192],
+          ['Tatte Bakery and Cafe', 42.3727 , -71.1170]
         ];
-          
-        
-        
-        
-        
-        var lowell = {lat: 42.3720 , lng: -71.1181 } ;
-        var mather = {lat: 42.3686, lng: -71.1153 } ;
-        var pfoho = {lat: 42.3821 , lng: -71.1248} ;
-        var quincy = {lat: 42.3705, lng: -71.1174 } ;
-        var winthrop = {lat: 42.3702, lng: -71.1191} ;
-        
-        var cabotlib = {lat: 42.3762 , lng: -71.1162} ;
-        var law = {lat: 42.3780 , lng: -71.1186} ;
-        var lamont = {lat: 42.3727, lng: -71.1155 } ;
-        var widener = {lat: 42.3734, lng: -71.1165 } ;
-        
-        var capital = {lat: 42.3727, lng: -71.1197} ;
-        var flour = {lat: 42.3730 , lng: -71.1225} ;
-        var peets = {lat: 42.3726 , lng: -71.1206 } ;
-        var starbucks = {lat: 42.3733 , lng: -71.1192 } ;
-        var tatte = {lat: 42.3727 , lng: -71.1170} ;
-        
-        
+     
+        var infoWindowContent = [
+          ['<div class="info_content">' +
+           '<h3>Brooklyn Museum</h3>' +
+        '<p>The Brooklyn Museum is an art museum located in the New York City borough of Brooklyn.</p>' + '</div>'],
+        ['<div class="info_content">' +
+        '<h3>Brooklyn Public Library</h3>' +
+        '<p>The Brooklyn Public Library (BPL) is the public library system of the borough of Brooklyn, in New York City.</p>' +
+        '</div>'],
+        ['<div class="info_content">' +
+        '<h3>Prospect Park Zoo</h3>' +
+        '<p>The Prospect Park Zoo is a 12-acre (4.9 ha) zoo located off Flatbush Avenue on the eastern side of Prospect Park, Brooklyn, New York City.</p>' +
+        '</div>']
+         ];
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
           center: yard
