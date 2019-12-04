@@ -17,27 +17,68 @@
         padding: 0;
       }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNSAKJ7vaGIjrxPdWwC1PyTtl72446D6w"></script>
     <script>
-      // In the following example, markers appear when the user clicks on the map.
-      // Each marker is labeled with a single alphabetical character.
-      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      
+      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
       var labelIndex = 0;
 
       function initialize() {
         var yard = {lat: 42.3744, lng: -71.1162} ;
+        
+        var smith = {lat: , lng: } ;
+        
+        var apley = {lat: 42.3724, lng: -71.1181} ;
+        var canaday = {lat: , lng: } ;
+        var grays = {lat: , lng: } ;
+        var greenough = {lat: , lng: } ;
+        var hollis = {lat: , lng: } ;
+        var hurlbut = {lat: , lng: } ;
+        var lionel = {lat: , lng: } ;
+        var mower = {lat: , lng: } ;
+        var mass = {lat: , lng: } ;
+        var matthews = {lat: 42.3741, lng: -71.1181} 
+        var stoughton = {lat: , lng: } ;
+        var straus = {lat: , lng: } ;
+        var thayer = {lat: , lng: } ;
+        var weld = {lat: , lng: } ;
+        var wigg = {lat: , lng: } ;
+        
+        var adams = {lat: , lng: } ;
+        var cabot = {lat: , lng: } ;
+        var currier = {lat: , lng: } ;
+        var dunster = {lat: , lng: } ;
+        var eliot = {lat: , lng: } ;
+        var kirkland = {lat: , lng: } ;
+        var leverett = {lat: , lng: } ;
+        var lowell = {lat: , lng: } ;
+        var mather = {lat: , lng: } ;
+        var pfoho = {lat: , lng: } ;
+        var quincy = {lat: , lng: } ;
+        var winthrop = {lat: , lng: } ;
+        
+        var cabotlib = {lat: , lng: } ;
+        var law = {lat: , lng: } ;
+        var lamont = {lat: , lng: } ;
+        var widener = {lat: , lng: } ;
+        
+        var capitol = {lat: , lng: } ;
+        var flour = {lat: , lng: } ;
+        var peets = {lat: , lng: } ;
+        var starbucks = {lat: , lng: } ;
+        var tatte = {lat: , lng: } ;
+        
+        
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
           center: yard
         });
 
-        // This event listener calls addMarker() when the map is clicked.
-        google.maps.event.addListener(map, 'click', function(event) {
-          addMarker(event.latLng, map);
-        });
-
+        
         // Add a marker at the center of the map.
-        addMarker(bangalore, map);
+        addMarker(smith, map);
+        addMarker(apley, map);
+        addMarker(matthews, map);
       }
 
       // Adds a marker to the map.
