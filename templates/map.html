@@ -1,33 +1,22 @@
-!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Marker Labels</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+{% extends "layout.html" %}
+
+{% block title %}
+    Marauder's Map
+{% endblock %}
+
+{% block main %}
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNSAKJ7vaGIjrxPdWwC1PyTtl72446D6w"></script>
     <script>
-      
+
       var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
       var labelIndex = 0;
 
       function initialize() {
         var yard = {lat: 42.3744, lng: -71.1162} ;
-        
+
         var smith = {lat: 42.3727 , lng: -71.1186} ;
-        
+
         var apley = {lat: 42.3724, lng: -71.1181} ;
         var canaday = {lat: 42.3753 , lng: -71.1159 } ;
         var grays = {lat: 42.3736 , lng: -71.1178 } ;
@@ -38,13 +27,13 @@
         var lionel = {lat: 42.3751 , lng: -71.1184} ;
         var mower = {lat: 42.3755 , lng: -71.1182 } ;
         var mass = {lat: 42.3744, lng: -71.1183 } ;
-        var matthews = {lat: 42.3741, lng: -71.1181} 
+        var matthews = {lat: 42.3741, lng: -71.1181}
         var stoughton = {lat: 42.3754 , lng: -71.1177} ;
         var straus = {lat: 42.3741, lng: -71.1186} ;
         var thayer = {lat: 42.3750 , lng: -71.1167 } ;
         var weld = {lat: 42.3739 , lng: -71.1171 } ;
         var wigg = {lat: 42.3731 , lng: -71.1171 } ;
-        
+
         var adams = {lat: 42.3717 , lng: -71.1167 } ;
         var cabot = {lat: 42.3812 , lng: -71.1247 } ;
         var currier = {lat: 42.3818, lng: -71.1255} ;
@@ -57,25 +46,25 @@
         var pfoho = {lat: 42.3821 , lng: -71.1248} ;
         var quincy = {lat: 42.3705, lng: -71.1174 } ;
         var winthrop = {lat: 42.3702, lng: -71.1191} ;
-        
+
         var cabotlib = {lat: 42.3762 , lng: -71.1162} ;
         var law = {lat: 42.3780 , lng: -71.1186} ;
         var lamont = {lat: 42.3727, lng: -71.1155 } ;
         var widener = {lat: 42.3734, lng: -71.1165 } ;
-        
+
         var capital = {lat: 42.3727, lng: -71.1197} ;
         var flour = {lat: 42.3730 , lng: -71.1225} ;
         var peets = {lat: 42.3726 , lng: -71.1206 } ;
         var starbucks = {lat: 42.3733 , lng: -71.1192 } ;
         var tatte = {lat: 42.3727 , lng: -71.1170} ;
-        
-        
+
+
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
           center: yard
         });
 
-        
+
         // Add a marker at locations of map
         addMarker(smith, map);
         addMarker(apley, map);
@@ -130,8 +119,4 @@
 
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-  </head>
-  <body>
-    <div id="map"></div>
-  </body>
-</html>
+{% endblock %}
