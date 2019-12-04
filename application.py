@@ -106,15 +106,13 @@ def check():
         # Check the user in
         elif check == "in":            
             # cancel process if user is already checked into that location (figure it out)
-            else:
-                db.execute # update query to add 1 to user's location
+         # update query to add 1 to user's location
             
-        elif check == "out":                       
+        else:                       
             # cancel process if user is not already checked into that location (figure it out)
             
             # insert the transaction into the database
-            else:
-                db.execute # update query to subtract 1 to user's location
+            # update query to subtract 1 to user's location
 
                 return redirect("/confirm")
 
