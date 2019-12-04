@@ -3,6 +3,7 @@
 
 # ASK ABOUT HOW TO IMPORT ALL OF THIS
 import os
+import requests
 
 from authlib.integrations.flask_client import OAuth
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, abort, url_for
