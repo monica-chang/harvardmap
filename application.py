@@ -20,6 +20,8 @@ for variable in ["CLIENT_ID", "CLIENT_SECRET", "SERVER_METADATA_URL"]:
     if not os.environ.get(variable):
         abort(500, f"Missing f{variable}")
 
+# a different change 
+
 # Configure application
 app = Flask(__name__)
 
