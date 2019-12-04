@@ -69,14 +69,13 @@ db = SQL("postgres://yhmehjlrjtmkaf:66f9a0cc0bc9167a5e69eb5e0e72e617ea3cbebc4f95
 
 @app.route("/")
 def index():
-    print ("error check")
     return render_template("index.html", userinfo=session.get("userinfo"))
 
 @app.route("/callback")
 def callback():
     token = oauth.cs50.authorize_access_token()
     session["userinfo"] = oauth.cs50.parse_id_token(token)
-    return redirect(url_for("index"), userinfo=session.get("userinfo"))
+    return redirect(url_for("index"))
 
 @app.route("/login")
 def login():
@@ -85,7 +84,7 @@ def login():
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("index"), userinfo=session.get("userinfo"))
+    return redirect(url_for("index"))
 
 @app.route("/map")
 @login_required
@@ -93,7 +92,7 @@ def map():
     """Show interactive map of where students are on campus Note: potential harry potter theme!!!"""
     # Query for all relevant info for how many students are at each study spot
 
-    return render_template("map.html", rows=rows, userinfo=session.get("userinfo"))
+    return render_template("map.html", userinfo=session.get("userinfo"))
 
 
 @app.route("/check", methods=["GET", "POST"])
@@ -159,7 +158,7 @@ def friends():
 
     else:
         # query to get your friends and their current locations
-        return render_template("friends.html", rows=rows, userinfo=session.get("userinfo"))
+        return render_template("friends.html", userinfo=session.get("userinfo"))
 
 
 def errorhandler(e):
