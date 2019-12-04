@@ -5,6 +5,7 @@
 import os
 import requests
 
+from cs50 import SQL
 from authlib.integrations.flask_client import OAuth
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, abort, url_for
 from flask_session import Session
