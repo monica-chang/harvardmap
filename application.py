@@ -64,6 +64,7 @@ db = SQL("postgres://yhmehjlrjtmkaf:66f9a0cc0bc9167a5e69eb5e0e72e617ea3cbebc4f95
 
 @app.route("/")
 def index():
+    print ("error check")
     return render_template("index.html", userinfo=session.get("userinfo"))
 
 @app.route("/callback")
