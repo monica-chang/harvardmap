@@ -32,7 +32,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
-                {% if session.user_id %}
+                {% if session.get("userinfo") is not None %}
                     <ul class="navbar-nav mr-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/map">Map</a></li>
                         <li class="nav-item"><a class="nav-link" href="/check">Check In/Out</a></li>
@@ -60,7 +60,7 @@
         <main class="container p-5">
             {% block main %}{% endblock %}
         </main>
-        
+
     </body>
 
 </html>
