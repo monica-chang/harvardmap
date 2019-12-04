@@ -2,3 +2,5 @@ Authlib
 Flask
 Flask-Session
 gunicorn
+oauthlib
+requests
