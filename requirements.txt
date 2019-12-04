@@ -5,3 +5,4 @@ gunicorn
 oauthlib
 requests
 cs50
+psycopg2
