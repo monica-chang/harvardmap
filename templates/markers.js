@@ -1,30 +1,7 @@
-<div id="map"></div>
-<!-- Replace the value of the key parameter with your own API key. -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk"></script>
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
+var labelIndex = 0;
 
-<body onload="initialize()">
-<div id="default" style="width:100%; height:100%"></div>
-</body>
-
-<style type="text/css">
-  #map_canvas {
-  height: 100%;
-}
-/* Optional: Makes the sample page fill the window. */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-</style>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk"></script>
-
-<script type="text/javascript">
-  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
-  var labelIndex = 0;
-
-  var markers = [
+var markers = [
     ['Smith Center', 42.3727 , -71.1186],
     ['Apley Court', 42.3724, -71.1181],
     ['Canaday Hall', 42.3753 , -71.1159],
@@ -65,16 +42,22 @@ html, body {
     ['Tatte Bakery and Cafe', 42.3727 , -71.1170]
   ];
 
-  function initialize() {
-    var myOptions = {
-      center: new google.maps.LatLng(42.3744, -71.1162),
-      zoom: 15,
-     };
-    var map = new google.maps.Map(document.getElementById("default"),
-      myOptions);
+function initialize() {
 
-    setMarkers(map, markers)
-  }
+var myOptions = {
+  center: new google.maps.LatLng(42.3744, -71.1162),
+  zoom: 15,
+
+
+ };
+var map = new google.maps.Map(document.getElementById("default"),
+  myOptions);
+
+setMarkers(map, markers)
+
+}
+
+
 
   function setMarkers(map, markers) {
     var marker, i 
@@ -91,18 +74,18 @@ html, body {
         title: inside
     });
 
-    var content = inside
+      var content = inside
 
-    var infowindow = new google.maps.InfoWindow()
-    google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
-      return function() {
-        infowindow.setContent(content);
-        infowindow.open(map,marker);
-      };
-    })(marker,content,infowindow));  
+      var infowindow = new google.maps.InfoWindow()
+      google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+        return function() {
+          infowindow.setContent(content);
+          infowindow.open(map,marker);
+        };
+      })(marker,content,infowindow));  
+
   }
 }
 
+
 google.maps.event.addDomListener(window, 'load', initialize);
-  
-</script>
