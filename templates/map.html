@@ -26,48 +26,48 @@
       function initialize() {
         var yard = {lat: 42.3744, lng: -71.1162} ;
         
-        var smith = {lat: , lng: } ;
+        var smith = {lat: 42.3727 , lng: -71.1186} ;
         
         var apley = {lat: 42.3724, lng: -71.1181} ;
-        var canaday = {lat: , lng: } ;
-        var grays = {lat: , lng: } ;
-        var greenough = {lat: , lng: } ;
-        var hollis = {lat: , lng: } ;
-        var holworthy = {lat: , lng: } ;
-        var hurlbut = {lat: , lng: } ;
-        var lionel = {lat: , lng: } ;
-        var mower = {lat: , lng: } ;
-        var mass = {lat: , lng: } ;
+        var canaday = {lat: 42.3753 , lng: -71.1159 } ;
+        var grays = {lat: 42.3736 , lng: -71.1178 } ;
+        var greenough = {lat: 42.3729 , lng: -71.1138 } ;
+        var hollis = {lat: 42.3750, lng: -71.1179} ;
+        var holworthy = {lat: 42.3755 , lng: -71.1172} ;
+        var hurlbut = {lat: 42.3721 , lng: -71.1139} ;
+        var lionel = {lat: 42.3751 , lng: -71.1184} ;
+        var mower = {lat: 42.3755 , lng: -71.1182 } ;
+        var mass = {lat: 42.3744, lng: -71.1183 } ;
         var matthews = {lat: 42.3741, lng: -71.1181} 
-        var stoughton = {lat: , lng: } ;
-        var straus = {lat: , lng: } ;
-        var thayer = {lat: , lng: } ;
-        var weld = {lat: , lng: } ;
-        var wigg = {lat: , lng: } ;
+        var stoughton = {lat: 42.3754 , lng: -71.1177} ;
+        var straus = {lat: 42.3741, lng: -71.1186} ;
+        var thayer = {lat: 42.3750 , lng: -71.1167 } ;
+        var weld = {lat: 42.3739 , lng: -71.1171 } ;
+        var wigg = {lat: 42.3731 , lng: -71.1171 } ;
         
-        var adams = {lat: , lng: } ;
-        var cabot = {lat: , lng: } ;
-        var currier = {lat: , lng: } ;
-        var dunster = {lat: , lng: } ;
-        var eliot = {lat: , lng: } ;
-        var kirkland = {lat: , lng: } ;
-        var leverett = {lat: , lng: } ;
-        var lowell = {lat: , lng: } ;
-        var mather = {lat: , lng: } ;
-        var pfoho = {lat: , lng: } ;
-        var quincy = {lat: , lng: } ;
-        var winthrop = {lat: , lng: } ;
+        var adams = {lat: 42.3717 , lng: -71.1167 } ;
+        var cabot = {lat: 42.3812 , lng: -71.1247 } ;
+        var currier = {lat: 42.3818, lng: -71.1255} ;
+        var dunster = {lat: 42.3686, lng: -71.1158} ;
+        var eliot = {lat: 42.3703, lng: -71.1209} ;
+        var kirkland = {lat: 42.3708 , lng: -71.1205 } ;
+        var leverett = {lat: 42.3701, lng: -71.1174} ;
+        var lowell = {lat: 42.3720 , lng: -71.1181 } ;
+        var mather = {lat: 42.3686, lng: -71.1153 } ;
+        var pfoho = {lat: 42.3821 , lng: -71.1248} ;
+        var quincy = {lat: 42.3705, lng: -71.1174 } ;
+        var winthrop = {lat: 42.3702, lng: -71.1191} ;
         
-        var cabotlib = {lat: , lng: } ;
-        var law = {lat: , lng: } ;
-        var lamont = {lat: , lng: } ;
-        var widener = {lat: , lng: } ;
+        var cabotlib = {lat: 42.3762 , lng: -71.1162} ;
+        var law = {lat: 42.3780 , lng: -71.1186} ;
+        var lamont = {lat: 42.3727, lng: -71.1155 } ;
+        var widener = {lat: 42.3734, lng: -71.1165 } ;
         
-        var capitol = {lat: , lng: } ;
-        var flour = {lat: , lng: } ;
-        var peets = {lat: , lng: } ;
-        var starbucks = {lat: , lng: } ;
-        var tatte = {lat: , lng: } ;
+        var capital = {lat: 42.3727, lng: -71.1197} ;
+        var flour = {lat: 42.3730 , lng: -71.1225} ;
+        var peets = {lat: 42.3726 , lng: -71.1206 } ;
+        var starbucks = {lat: 42.3733 , lng: -71.1192 } ;
+        var tatte = {lat: 42.3727 , lng: -71.1170} ;
         
         
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -76,7 +76,7 @@
         });
 
         
-        // Add a marker at the center of the map.
+        // Add a marker at locations of map
         addMarker(smith, map);
         addMarker(apley, map);
         addMarker(canaday, map);
@@ -110,7 +110,7 @@
         addMarker(law, map);
         addMarker(lamont, map);
         addMarker(widener, map);
-        addMarker(capitol, map);
+        addMarker(capital, map);
         addMarker(flour, map);
         addMarker(peets, map);
         addMarker(starbucks, map);
