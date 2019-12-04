@@ -86,7 +86,7 @@ html, body {
       latlngset = new google.maps.LatLng(lat, long);
       var marker = new google.maps.Marker({
         position: latlngset,
-        label: labels[labelIndex++ % labels.length],
+        label: labels[i],
         map: map,
         title: inside
     });
