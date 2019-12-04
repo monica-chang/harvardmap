@@ -76,16 +76,16 @@ def index():
 def callback():
     token = oauth.cs50.authorize_access_token()
     session["userinfo"] = oauth.cs50.parse_id_token(token)
-    return redirect(url_for("index"))
+    return redirect(url_for("index"), userinfo=session.get("userinfo"))
 
 @app.route("/login")
 def login():
-    return oauth.cs50.authorize_redirect(redirect_uri=url_for("callback", _external=True))
+    return oauth.cs50.authorize_redirect(redirect_uri=url_for("callback", _external=True), userinfo=session.get("userinfo"))
 
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("index"))
+    return redirect(url_for("index"), userinfo=session.get("userinfo"))
 
 @app.route("/map")
 @login_required
@@ -93,7 +93,7 @@ def map():
     """Show interactive map of where students are on campus Note: potential harry potter theme!!!"""
     # Query for all relevant info for how many students are at each study spot
 
-    return render_template("map.html", rows=rows)
+    return render_template("map.html", rows=rows, userinfo=session.get("userinfo"))
 
 
 @app.route("/check", methods=["GET", "POST"])
@@ -131,7 +131,7 @@ def check():
 def confirm():
     """Confirm user successfully submitted request"""
 
-    return render_template("confirm.html")
+    return render_template("confirm.html", userinfo=session.get("userinfo"))
 
 
 @app.route("/friends", methods=["GET", "POST"])
@@ -159,7 +159,7 @@ def friends():
 
     else:
         # query to get your friends and their current locations
-        return render_template("friends.html", rows=rows)
+        return render_template("friends.html", rows=rows, userinfo=session.get("userinfo"))
 
 
 def errorhandler(e):
