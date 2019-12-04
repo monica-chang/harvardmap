@@ -22,7 +22,7 @@ for variable in ["CLIENT_ID", "CLIENT_SECRET", "SERVER_METADATA_URL"]:
     if not os.environ.get(variable):
         abort(500, f"Missing f{variable}")
 
-# a different change 
+# a different change
 
 # Configure application
 app = Flask(__name__)
@@ -149,8 +149,9 @@ def friends():
                               username=username)
         # Ensure username exists before following friend
         if len(rows) != 1:
-            return apology("invalid username , 403)
+            return apology("invalid username" , 403)
         else:
+            return apology("TODO")
             #TODO update queries to establish follower/followee relationship
 
         return redirect("/friends")
