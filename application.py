@@ -1,4 +1,4 @@
-# NOTE: Implemented HUID authentication using code from https://github.com/cs50/id/tree/master/flask 
+# NOTE: Implemented HUID authentication using code from https://github.com/cs50/id/tree/master/flask
 # TODO Get custom domain name using Github Student Pack https://www.name.com/partner/github-students
 
 # ASK ABOUT HOW TO IMPORT ALL OF THIS
@@ -14,6 +14,8 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import apology, login_required, lookup, usd
+
+# testing git
 
 # Check for environment variables
 for variable in ["CLIENT_ID", "CLIENT_SECRET", "SERVER_METADATA_URL"]:
@@ -87,7 +89,7 @@ def logout():
 def map():
     """Show interactive map of where students are on campus Note: potential harry potter theme!!!"""
     # Query for all relevant info for how many students are at each study spot
-    
+
     return render_template("map.html", rows=rows)
 
 
@@ -98,19 +100,19 @@ def check():
      # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         location = request.form.get("location")
-        check = request.form.get("check") 
+        check = request.form.get("check")
 
         #Ensure the location exists and the number of shares is positive
         if location == '':
             return apology("must provide location")
         # Check the user in
-        elif check == "in":            
-            return apology("TODO")   
+        elif check == "in":
+            return apology("TODO")
             # cancel process if user is already checked into that location (figure it out)
-            # update query to add 1 to user's location     
-        else:                       
+            # update query to add 1 to user's location
+        else:
             # cancel process if user is not already checked into that location (figure it out)
-            
+
             # insert the transaction into the database
             # update query to subtract 1 to user's location
 
@@ -125,7 +127,7 @@ def check():
 @login_required
 def confirm():
     """Confirm user successfully submitted request"""
-    
+
     return render_template("confirm.html")
 
 
@@ -135,11 +137,11 @@ def friends():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         username=request.form.get("username") # search for friend's username
-        
+
         # Ensure username is entered
         if not username:
             return apology("must provide username", 403)
-        else:          
+        else:
             # Query database for username
             rows = db.execute("SELECT * FROM users WHERE username = :username",
                               username=username)
@@ -148,14 +150,14 @@ def friends():
             return apology("invalid username , 403)
         else:
             #TODO update queries to establish follower/followee relationship
-                           
+
         return redirect("/friends")
 
     else:
         # query to get your friends and their current locations
         return render_template("friends.html", rows=rows)
 
-                           
+
 def errorhandler(e):
     """Handle error"""
     if not isinstance(e, HTTPException):
