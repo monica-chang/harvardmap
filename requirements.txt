@@ -1,8 +1,0 @@
-Authlib
-Flask
-Flask-Session
-gunicorn
-oauthlib
-requests
-cs50
-psycopg2

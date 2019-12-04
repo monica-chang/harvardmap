@@ -65,7 +65,7 @@ def login_required(f):
     return decorated_function
 
 # Configure CS50 Library to use SQLite database, will need tables for follower/followee + people at each location
-db = SQL("postgres://yhmehjlrjtmkaf:66f9a0cc0bc9167a5e69eb5e0e72e617ea3cbebc4f95b960a67e558e9e75a390@ec2-174-129-255-59.compute-1.amazonaws.com:5432/df04v351hcq3kd")
+db = SQL("sqlite:///friends.db")
 
 @app.route("/")
 def index():
@@ -145,8 +145,8 @@ def friends():
             return apology("must provide username", 403)
         else:
             # Query database for username
-            rows = db.execute("SELECT * FROM users WHERE username = :username",
-                              username=username)
+            rows = db.execute("SELECT * FROM users WHERE username = :username", username=username)
+            return apology("TODO")
         # Ensure username exists before following friend
         if len(rows) != 1:
             return apology("invalid username" , 403)
