@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Index
+    Welcome
 {% endblock %}
 
 {% block main %}
-    Welcome to Marauder's Map: Harvard Edition.
+    <h1>Welcome to Marauder's Map: Harvard Edition.</h1>
 
     {% if userinfo %}
             <p>
@@ -24,7 +24,9 @@
             </p>
         {% else %}
             <p>
-                You are not logged in. <a href="/login">Log in</a>.
+                Want to discover Harvard's best study spaces and secret passages? Login to find your friends on campus.
+                <br>
+                <a href="/login">I solemnly swear I am up to no good.</a>.
             </p>
      {% endif %}
 {% endblock %}
