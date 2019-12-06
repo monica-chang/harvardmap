@@ -2,6 +2,7 @@
     id INTEGER,
     username TEXT UNIQUE,
     name TEXT,
+    location TEXT,
     PRIMARY KEY(id)
 );
 
