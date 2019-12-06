@@ -4,34 +4,6 @@
     Check In/Out
 {% endblock %}
 
-{% block javascript %}
-    const source = document.querySelector("#Location");
-    const target1 = document.querySelector("#Dorms");
-    const target2 = document.querySelector("#Houses");
-    const target3 = document.querySelector("#Libraries");
-    const target4 = document.querySelector("#Cafes");
-
-    const displayWhenSelected = (source, value, target) => {
-        const selectedIndex = source.selectedIndex;
-        const isSelected = source[selectedIndex].value === value;
-        target.classList[isSelected
-            ? "add"
-            : "remove"
-        ]("show");
-    };
-    source.addEventListener("change", (evt) =>
-        displayWhenSelected(source, "First-Year Dorm", target1)
-    );
-    source.addEventListener("change", (evt) =>
-        displayWhenSelected(source, "Upperclass House", target2)
-    );
-    source.addEventListener("change", (evt) =>
-        displayWhenSelected(source, "Library", target3)
-    );
-    source.addEventListener("change", (evt) =>
-        displayWhenSelected(source, "Cafe", target4)
-    );
-{% endblock %}
 
 {% block main %}
     <link href="/static/mystyles.css" rel="stylesheet">
@@ -49,13 +21,13 @@
            <select class="form-control" id="Location">
              <option>Select</option>
              <option>First-Year Dorm</option>
-             <option>Upperclass House</option>
+             <option>Upperclassmen House</option>
              <option>Library</option>
              <option>Cafe</option>
              <option>Smith Center</option>
            </select>
          </div>
-         <div>
+         <div class="form-group">
            <select id="Dorms">
              <option>Apley Court</option>
              <option>Canaday</option>
@@ -76,7 +48,7 @@
              <option>Wigglesworth</option>
            </select>
          </div>
-         <div>
+         <div class="form-group">
            <select id="Houses">
              <option>Adams</option>
              <option>Cabot</option>
@@ -92,7 +64,7 @@
              <option>Winthrop</option>
            </select>
          </div>
-         <div>
+         <div class="form-group">
            <select id="Libraries">
              <option>Cabot</option>
              <option>Langdell Law School Library</option>
@@ -100,7 +72,7 @@
              <option>Widener</option>
            </select>
          </div>
-         <div>
+         <div class="form-group">
            <select id="Cafes">
              <option>Capital One</option>
              <option>Flour</option>
@@ -111,4 +83,24 @@
           </div>
          <button class="btn btn-primary" type="submit">Submit</button>
      </form>
+     <script>
+        const source = document.querySelector("#Location");
+        const target1 = document.querySelector("#Dorms");
+        const target2 = document.querySelector("#Houses");
+        const target3 = document.querySelector("#Libraries");
+        const target4 = document.querySelector("#Cafes");
+
+        const displayWhenSelected = (source, value, target) => {
+            const selectedIndex = source.selectedIndex;
+            const isSelected = source[selectedIndex].value === value;
+            target.classList[isSelected
+                ? "add"
+                : "remove"
+            ]("show");
+        };
+        source.addEventListener("change", (evt) => displayWhenSelected(source, "First-Year Dorm", target1));
+        source.addEventListener("change", (evt) => displayWhenSelected(source, "Upperclass House", target2));
+        source.addEventListener("change", (evt) => displayWhenSelected(source, "Library", target3));
+        source.addEventListener("change", (evt) => displayWhenSelected(source, "Cafe", target4));
+    </script>
 {% endblock %}

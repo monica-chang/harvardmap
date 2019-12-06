@@ -9,16 +9,18 @@
 
     {% if userinfo %}
             <p>
-                You are logged in.
+                <br>
+                Hello {{ userinfo["name"] }}! You have successfully logged in.
+                <br>
+                <br>
+                Click on "Campus Map" to see the # of students at any freshman dorm, upperclassmen house, library, or cafe.
+                <br>
+                <br>
+                Click on "Check In/Out" to check in and out of your current location.
+                <br>
+                <br>
+                Click on "Find My Friends" to find out where your friends are right now on campus.
             </p>
-            <dl>
-                <dt><code>sub</code></dt>
-                <dd><code>{{ userinfo["sub"] }}</code></dd>
-                <dt><code>name</code></dt>
-                <dd><code>{{ userinfo["name"] }}</code></dd>
-                <dt><code>email</code></dt>
-                <dd><code>{{ userinfo["email"] }}</code></dd>
-            </dl>
             <p>
                 <a href="/logout">Log out</a>.
             </p>
