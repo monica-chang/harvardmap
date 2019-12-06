@@ -1,0 +1,14 @@
+CREATE TABLE "users" (
+	"sub"	TEXT NOT NULL UNIQUE,
+	"name"	TEXT NOT NULL,
+	"email"	TEXT NOT NULL,
+	"location"	TEXT,
+	PRIMARY KEY("sub")
+);
+
+CREATE TABLE "locations" (
+	"location"	TEXT UNIQUE,
+	"numpeople"	INTEGER,
+	PRIMARY KEY("location"),
+	FOREIGN KEY("location") REFERENCES "users"("location")
+);
