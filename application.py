@@ -147,9 +147,17 @@ def check():
 
     # Check the user out
     else:
-        # Error check to make sure the user does not check into a location twice
+        # Error check to make sure the user does not check out of a location they haven't checked into yet
         if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) != place:
             return apology("you have not checked in yet")
+        else:
+            # Update the user's current location in the database
+            db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=NULL, sub=userinfo["sub"])
+            # Subtract 1 from the current number of people at the location
+            else:
+                db.execute("UPDATE locations SET numpeople = numpeople - 1 WHERE location=:location", location=place)
+
+
 
 
             # insert the transaction into the database
