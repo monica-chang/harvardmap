@@ -76,6 +76,7 @@ def callback():
     token = oauth.cs50.authorize_access_token()
     session["userinfo"] = oauth.cs50.parse_id_token(token)
     userinfo=session.get("userinfo")
+    # if the user that just logged in has never logged in before, add the news user to the SQL database
     if len(db.execute("SELECT * FROM users WHERE sub=:sub", sub=userinfo["sub"])) == 0:
         newuser = db.execute("INSERT INTO users (sub, name, email) VALUES (:sub, :name, :email)", sub=userinfo["sub"], name=userinfo["name"], email=userinfo["email"])
     return redirect(url_for("index"))
@@ -102,11 +103,16 @@ def map():
 @login_required
 def check():
     """Check the user into a study location"""
+
+    userinfo=session.get("userinfo")
+
      # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
+        # Determine whether the user is checking in or out
         check = request.form.get("check")
 
+        # Get the name of the location the user is checking in at
         location = request.form.get("location")
         if location == "First-Year Dorms":
             place = request.form.get("dorms")
@@ -120,17 +126,31 @@ def check():
             place = request.form.get("location")
 
     #Ensure the place exists
-    if place == '':
+    if place is None:
         return apology("must provide location")
 
     #Check the user in
-    # if check == "Check In":
+    if check == "Check In":
+        # Error check to make sure the user does not check into a location twice
+        if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) == place:
+            return apology("you have already checked in")
+        else:
+            # Update the user's current location in the database
+            db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=place, sub=userinfo["sub"])
 
-            #return apology("TODO")
-            # cancel process if user is already checked into that location (figure it out)
-            # update query to add 1 to user's location
-        #else:
-            # cancel process if user is not already checked into that location (figure it out)
+            # If the location has not yet been checked into, add the location to the database
+            if len(db.execute("SELECT * FROM locations WHERE location=:location", location=place)) == 0:
+                db.execute("INSERT INTO locations (location, numpeople) VALUES (:location, :numpeople)", location=place, numpeople=0)
+            # If the location has already been checked into, add 1 to the current number of people at the location
+            else:
+                db.execute("UPDATE locations SET numpeople = numpeople + 1 WHERE location=:location", location=place)
+
+    # Check the user out
+    else:
+        # Error check to make sure the user does not check into a location twice
+        if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) != place:
+            return apology("you have not checked in yet")
+
 
             # insert the transaction into the database
             # update query to subtract 1 to user's location
