@@ -11,24 +11,24 @@
     <form>
          <div class="form-group">
            <label for="Process">Check In or Check Out</label>
-           <select class="form-control" id="Process">
+           <select class="form-control" name="check">
              <option>Check In</option>
              <option>Check Out</option>
            </select>
          </div>
          <div class="form-group">
            <label for="Location">Location</label>
-           <select class="form-control" id="Location">
+           <select class="form-control" name="location">
              <option>Select</option>
-             <option>First-Year Dorm</option>
-             <option>Upperclassmen House</option>
-             <option>Library</option>
-             <option>Cafe</option>
+             <option>First-Year Dorms</option>
+             <option>Upperclassmen Houses</option>
+             <option>Libraries</option>
+             <option>Cafes</option>
              <option>Smith Center</option>
            </select>
          </div>
          <div class="form-group">
-           <select id="Dorms">
+           <select id="Dorms" name="dorms">
              <option>Apley Court</option>
              <option>Canaday</option>
              <option>Grays</option>
@@ -49,7 +49,7 @@
            </select>
          </div>
          <div class="form-group">
-           <select id="Houses">
+           <select id="Houses" name="houses">
              <option>Adams</option>
              <option>Cabot</option>
              <option>Currier</option>
@@ -65,7 +65,7 @@
            </select>
          </div>
          <div class="form-group">
-           <select id="Libraries">
+           <select id="Libraries" name="libraries">
              <option>Cabot</option>
              <option>Langdell Law School Library</option>
              <option>Lamont</option>
@@ -73,7 +73,7 @@
            </select>
          </div>
          <div class="form-group">
-           <select id="Cafes">
+           <select id="Cafes" name="cafes">
              <option>Capital One</option>
              <option>Flour</option>
              <option>Peet's</option>
@@ -99,7 +99,7 @@
             ]("show");
         };
         source.addEventListener("change", (evt) => displayWhenSelected(source, "First-Year Dorm", target1));
-        source.addEventListener("change", (evt) => displayWhenSelected(source, "Upperclass House", target2));
+        source.addEventListener("change", (evt) => displayWhenSelected(source, "Upperclassmen House", target2));
         source.addEventListener("change", (evt) => displayWhenSelected(source, "Library", target3));
         source.addEventListener("change", (evt) => displayWhenSelected(source, "Cafe", target4));
     </script>

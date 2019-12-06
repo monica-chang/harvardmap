@@ -65,7 +65,7 @@ def login_required(f):
     return decorated_function
 
 # Configure CS50 Library to use SQLite database, will need tables for follower/followee + people at each location
-db = SQL("sqlite:///friends.db")
+db = SQL("sqlite:///harvardmap.db")
 
 @app.route("/")
 def index():
@@ -75,6 +75,9 @@ def index():
 def callback():
     token = oauth.cs50.authorize_access_token()
     session["userinfo"] = oauth.cs50.parse_id_token(token)
+    userinfo=session.get("userinfo")
+    if len(db.execute("SELECT * FROM users WHERE sub=:sub", sub=userinfo["sub"])) == 0:
+        newuser = db.execute("INSERT INTO users (sub, name, email) VALUES (:sub, :name, :email)", sub=userinfo["sub"], name=userinfo["name"], email=userinfo["email"])
     return redirect(url_for("index"))
 
 @app.route("/login")
@@ -101,24 +104,38 @@ def check():
     """Check the user into a study location"""
      # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        location = request.form.get("location")
+
         check = request.form.get("check")
 
-        #Ensure the location exists and the number of shares is positive
-        if location == '':
-            return apology("must provide location")
-        # Check the user in
-        elif check == "in":
-            return apology("TODO")
+        location = request.form.get("location")
+        if location == "First-Year Dorms":
+            place = request.form.get("dorms")
+        elif location == "Upperclassmen Houses":
+            place = request.form.get("houses")
+        elif location == "Libraries":
+            place = request.form.get("libraries")
+        elif location == "Cafes":
+            place = request.form.get("cafes")
+        else:
+            place = request.form.get("location")
+
+    #Ensure the place exists
+    if place == '':
+        return apology("must provide location")
+
+    #Check the user in
+    # if check == "Check In":
+
+            #return apology("TODO")
             # cancel process if user is already checked into that location (figure it out)
             # update query to add 1 to user's location
-        else:
+        #else:
             # cancel process if user is not already checked into that location (figure it out)
 
             # insert the transaction into the database
             # update query to subtract 1 to user's location
 
-            return redirect("/confirm")
+            #return redirect("/confirm")
 
     #User reached route via GET, display form to request stock quote
     else:
@@ -134,6 +151,7 @@ def confirm():
 
 
 @app.route("/friends", methods=["GET", "POST"])
+@login_required
 def friends():
     """Allow user to follow their friends and see their current location in a table"""
     # User reached route via POST (as by submitting a form via POST)
