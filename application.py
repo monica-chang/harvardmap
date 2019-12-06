@@ -125,45 +125,40 @@ def check():
         else:
             place = request.form.get("location")
 
-    #Ensure the place exists
-    if place is None:
-        return apology("must provide location")
+        #Ensure the place exists
+        if place is None:
+            return apology("must provide location")
 
-    #Check the user in
-    if check == "Check In":
-        # Error check to make sure the user does not check into a location twice
-        if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) == place:
-            return apology("you have already checked in")
-        else:
-            # Update the user's current location in the database
-            db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=place, sub=userinfo["sub"])
-
-            # If the location has not yet been checked into, add the location to the database
-            if len(db.execute("SELECT * FROM locations WHERE location=:location", location=place)) == 0:
-                db.execute("INSERT INTO locations (location, numpeople) VALUES (:location, :numpeople)", location=place, numpeople=0)
-            # If the location has already been checked into, add 1 to the current number of people at the location
+        #Check the user in
+        if check == "Check In":
+            # Error check to make sure the user does not check into a location twice
+            if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) == place:
+                return apology("you have already checked in")
             else:
-                db.execute("UPDATE locations SET numpeople = numpeople + 1 WHERE location=:location", location=place)
+                # Update the user's current location in the database
+                db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=place, sub=userinfo["sub"])
 
-    # Check the user out
-    else:
-        # Error check to make sure the user does not check out of a location they haven't checked into yet
-        if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) != place:
-            return apology("you have not checked in yet")
+                # If the location has not yet been checked into, add the location to the database
+                if len(db.execute("SELECT * FROM locations WHERE location=:location", location=place)) == 0:
+                    db.execute("INSERT INTO locations (location, numpeople) VALUES (:location, :numpeople)", location=place, numpeople=0)
+                # If the location has already been checked into, add 1 to the current number of people at the location
+                else:
+                    db.execute("UPDATE locations SET numpeople = numpeople + 1 WHERE location=:location", location=place)
+
+                return redirect("/confirm")
+
+        # Check the user out
         else:
-            # Update the user's current location in the database
-            db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=NULL, sub=userinfo["sub"])
-            # Subtract 1 from the current number of people at the location
+            # Error check to make sure the user does not check out of a location they haven't checked into yet
+            if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) != place:
+                return apology("you have not checked in yet")
             else:
+                # Update the user's current location in the database
+                db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=NULL, sub=userinfo["sub"])
+                # Subtract 1 from the current number of people at the location
                 db.execute("UPDATE locations SET numpeople = numpeople - 1 WHERE location=:location", location=place)
 
-
-
-
-            # insert the transaction into the database
-            # update query to subtract 1 to user's location
-
-            #return redirect("/confirm")
+                return redirect("/confirm")
 
     #User reached route via GET, display form to request stock quote
     else:
