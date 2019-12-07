@@ -74,7 +74,7 @@
             var lat = markers[i][1]
             var long = markers[i][2]
             var inside = markers[i][0]
-            var num = markers[i][4]                                  
+            var num = markers[i][4]
 
             latlngset = new google.maps.LatLng(lat, long);
             var marker = new google.maps.Marker({
@@ -84,7 +84,7 @@
               title: inside
             });
 
-            var content = inside + num 
+            var content = inside + num
 
             var infowindow = new google.maps.InfoWindow()
             google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){

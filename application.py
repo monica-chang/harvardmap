@@ -96,7 +96,7 @@ def map():
     """Show interactive map of where students are on campus Note: potential harry potter theme!!!"""
     # Query for all relevant info for how many students are at each study spot
 
-    return render_template("map2.html", userinfo=session.get("userinfo"))
+    return render_template("map2.html", userinfo=session.get("userinfo"), db=SQL("sqlite:///harvardmap.db"))
 
 
 @app.route("/check", methods=["GET", "POST"])
