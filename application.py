@@ -114,13 +114,13 @@ def check():
 
         # Get the name of the location the user is checking in at
         location = request.form.get("location")
-        if location == "First-Year Dorms":
+        if location == "First-Year Dorm":
             place = request.form.get("dorms")
-        elif location == "Upperclassmen Houses":
+        elif location == "Upperclassmen House":
             place = request.form.get("houses")
-        elif location == "Libraries":
+        elif location == "Library":
             place = request.form.get("libraries")
-        elif location == "Cafes":
+        elif location == "Cafe":
             place = request.form.get("cafes")
         else:
             place = request.form.get("location")
@@ -132,15 +132,17 @@ def check():
         #Check the user in
         if check == "Check In":
             # Error check to make sure the user does not check into a location twice
-            if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) == place:
+            if db.execute("SELECT location FROM users WHERE sub=:sub", sub=userinfo["sub"])[0]['location'] == place:
                 return apology("you have already checked in")
+            elif db.execute("SELECT location FROM users WHERE sub=:sub", sub=userinfo["sub"])[0]['location'] != "Not checked in":
+                return apology("you can't be in multiple places at the same time")
             else:
                 # Update the user's current location in the database
                 db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=place, sub=userinfo["sub"])
 
                 # If the location has not yet been checked into, add the location to the database
                 if len(db.execute("SELECT * FROM locations WHERE location=:location", location=place)) == 0:
-                    db.execute("INSERT INTO locations (location, numpeople) VALUES (:location, :numpeople)", location=place, numpeople=0)
+                    db.execute("INSERT INTO locations (location, numpeople) VALUES (:location, :numpeople)", location=place, numpeople=1)
                 # If the location has already been checked into, add 1 to the current number of people at the location
                 else:
                     db.execute("UPDATE locations SET numpeople = numpeople + 1 WHERE location=:location", location=place)
@@ -150,11 +152,14 @@ def check():
         # Check the user out
         else:
             # Error check to make sure the user does not check out of a location they haven't checked into yet
-            if db.execute("SELECT location FROM users WHERE :sub=sub", sub=userinfo["sub"]) != place:
+            if db.execute("SELECT location FROM users WHERE sub=:sub", sub=userinfo["sub"])[0]['location'] != place:
                 return apology("you have not checked in yet")
+            # Error check to make sure there are not negative people at a location for some reason
+            elif db.execute("SELECT numpeople FROM locations WHERE location=:location", location=place)[0]['numpeople'] <= 0:
+                return apology("there cannot be negative people at this location")
             else:
                 # Update the user's current location in the database
-                db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=NULL, sub=userinfo["sub"])
+                db.execute("UPDATE users SET location=:location WHERE sub=:sub", location="Not checked in", sub=userinfo["sub"])
                 # Subtract 1 from the current number of people at the location
                 db.execute("UPDATE locations SET numpeople = numpeople - 1 WHERE location=:location", location=place)
 

@@ -19,7 +19,7 @@
          <div class="form-group">
            <label for="Location">Location</label>
            <select class="form-control" id="Location" name="location">
-             <option>Select</option>
+             <option disabled selected value="">Location</option>
              <option>First-Year Dorm</option>
              <option>Upperclassmen House</option>
              <option>Library</option>
@@ -49,7 +49,7 @@
              <option>Wigglesworth</option>
            </select>
          </div>
-         <div class="form-group" name="houses">
+         <div class="form-group">
            <select class="form-control" id="Houses" name="houses">
              <option disabled selected value="">Upperclassmen House</option>
              <option>Adams</option>
@@ -102,7 +102,7 @@
             ]("show");
         };
         source.addEventListener("change", (evt) => displayWhenSelected(source, "First-Year Dorm", target1));
-        source.addEventListener("change", (evt) => displayWhenSelected(source, "Upperclass House", target2));
+        source.addEventListener("change", (evt) => displayWhenSelected(source, "Upperclassmen House", target2));
         source.addEventListener("change", (evt) => displayWhenSelected(source, "Library", target3));
         source.addEventListener("change", (evt) => displayWhenSelected(source, "Cafe", target4));
     </script>
