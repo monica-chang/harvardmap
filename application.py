@@ -180,23 +180,31 @@ def confirm():
 @login_required
 def friends():
     """Allow user to follow their friends and see their current location in a table"""
+
+    userinfo=session.get("userinfo")
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        username=request.form.get("username") # search for friend's username
+        email=request.form.get("email") # search for friend's email
 
-        # Ensure username is entered
-        if not username:
-            return apology("must provide username", 403)
+        # Ensure email is entered
+        if not email:
+            return apology("must provide email", 403)
         else:
-            # Query database for username
-            rows = db.execute("SELECT * FROM users WHERE username = :username", username=username)
-            return apology("TODO")
-        # Ensure username exists before following friend
-        if len(rows) != 1:
-            return apology("invalid username" , 403)
-        else:
-            return apology("TODO")
-            #TODO update queries to establish follower/followee relationship
+            # Query database for email
+            rows = db.execute("SELECT * FROM users WHERE email=:email", email=email)
+
+            # Ensure person exists before following them
+            if len(rows) != 1:
+                return apology("invalid email" , 403)
+
+        # Error check: if you already have 10 friends, you can't add anymore
+        if len(db.execute("SELECT  FROM users "))
+        name = db.execute("SELECT name FROM users WHERE email=:email", email=email)[0]['name']
+        db.execute("UPDATE users SET friend1=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+
+
+
 
         return redirect("/friends")
 

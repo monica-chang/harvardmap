@@ -5,9 +5,13 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/buy" method="post">
+    <br>
+    You may follow up to 10 friends and know their current location by entering their email.
+    <br>
+    <br>
+    <form action="/friends" method="post">
         <div class="form-group">
-            <input class="form-control" name="username" placeholder="Email" type="text">
+            <input class="form-control" name="email" placeholder="Email" type="text">
         </div>
         <button class="btn btn-primary" type="">Follow</button>
     </form>
