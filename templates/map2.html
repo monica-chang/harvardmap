@@ -77,9 +77,9 @@
           var loc = locs[i];
           var number = {{ db.execute("SELECT numpeople FROM locations WHERE location=:location", location=loc)[0]['numpeople']) }};
           var num = [number];
-          numnames[i] = [num];
+          numnames[i] = num;
           for (j = 0; j < number; j++) {
-            var name = {{ db.execute("SELECT name FROM users WHERE location=:location", location=loc)[j]['numpeople']) }};
+            var name = {{ db.execute("SELECT name FROM users WHERE location=:location", location=loc)[j]['name']) }};
             numnames[i].push(name);
           }
         }
