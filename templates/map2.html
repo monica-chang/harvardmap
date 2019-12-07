@@ -4,9 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-
 
   <title>Marauder's Map: Harvard Edition - Interactive Map</title>
   <style type="text/css">
@@ -23,49 +20,51 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp-cZG1SpG8R_ScIiLvgDa-rTtMM6B0Eg"></script>
+  <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
   <script>
       var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
       var labelIndex = 0;
 
       var markers = [
-          ['Smith Center', 42.3727 , -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Smith Center'") }}],
-          ['Apley Court', 42.3724, -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Apley Court'") }}],
-          ['Canaday Hall', 42.3753 , -71.1159, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Canaday Hall'") }}],
-          ['Grays Hall', 42.3736 , -71.1178, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Grays Hall'") }}],
-          ['Greenough Hall', 42.3729 , -71.1138, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Greenough Hall'") }}],
-          ['Hollis Hall', 42.3750, -71.1179, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Hollis Hall'") }}],
-          ['Holworthy Hall', 42.3755 , -71.1172, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Holworthy Hall'") }}],
-          ['Hurlbut Hall', 42.3721 , -71.1139, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Hurlbut Hall'") }}],
-          ['Lionel Hall', 42.3751 , -71.1184, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lionel Hall'") }}],
-          ['Mower Hall', 42.3755 , -71.1182, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mower Hall'") }}],
-          ['Mass Hall', 42.3744, -71.1183, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mass Hall'") }}],
-          ['Matthews Hall', 42.3741, -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Matthews Hall'") }}],
-          ['Stoughton Hall', 42.3754 , -71.1177, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Stoughton Hall'") }}],
-          ['Straus Hall', 42.3741, -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Straus Hall'") }}],
-          ['Thayer Hall', 42.3750 , -71.1167, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Thayer Hall'") }}],
-          ['Weld Hall', 42.3739 , -71.1171, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Weld Hall'") }}],
-          ['Wigg Hall', 42.3731 , -71.1171, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Wigg Hall'") }}],
-          ['Adams House', 42.3717 , -71.1167, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Adams House'") }}],
-          ['Cabot House', 42.3812 , -71.1247, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Cabot House'") }}],
-          ['Currier House', 42.3818, -71.1255, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Currier House'") }}],
-          ['Dunster House', 42.3686, -71.1158, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Dunster House'") }}],
-          ['Eliot House', 42.3703, -71.1209, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Eliot House'") }}],
-          ['Kirkland House', 42.3708 , -71.1205, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Kirkland House'") }}],
-          ['Leverett House', 42.3701, -71.1174, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Leverett House'") }}],
-          ['Lowell House', 42.3720 , -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lowell House'") }}],
-          ['Mather House', 42.3686, -71.1153, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mather House'") }}],
-          ['Pforzheimer House', 42.3821 , -71.1248, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Pforzheimer House'") }}],
-          ['Quincy House', 42.3705, -71.1174, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Quincy House'") }}],
-          ['Winthrop House', 42.3702,  -71.1191, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Winthrop House'") }}],
-          ['Cabot Library', 42.3762 , -71.1162, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Cabot Library'") }}],
-          ['Law School Library', 42.3780 , -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Law School Library'") }}],
-          ['Lamont Library', 42.3727, -71.1155, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lamont Library'") }}],
-          ['Widener Library', 42.3734, -71.1165, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Widener Library'") }}],
-          ['Capital One Cafe', 42.3727, -71.1197, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Capital One Cafe'") }}],
-          ['Flour Bakery', 42.3730 , -71.1225, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Flour Bakery'") }}],
-          ['Peets Cafe', 42.3726 , -71.1206, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Peets Cafe'") }}],
-          ['Starbucks', 42.3733 , -71.1192, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Starbucks'") }}],
-          ['Tatte Bakery and Cafe', 42.3727 , -71.1170, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Tatte Bakery and Cafe'") }}]
+          ['Smith Center', 42.3727 , -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Smith Center'")[0]['numpeople'] }}],
+          ['Apley Court', 42.3724, -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Apley Court'")[0]['numpeople'] }}],
+          ['Canaday Hall', 42.3753 , -71.1159, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Canaday'")[0]['numpeople'] }}],
+          ['Grays Hall', 42.3736 , -71.1178, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Grays'")[0]['numpeople'] }}],
+          ['Greenough Hall', 42.3729 , -71.1138, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Greenough'")[0]['numpeople'] }}],
+          ['Hollis Hall', 42.3750, -71.1179, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Hollis'")[0]['numpeople'] }}],
+          ['Holworthy Hall', 42.3755 , -71.1172, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Holworthy'")[0]['numpeople'] }}],
+          ['Hurlbut Hall', 42.3721 , -71.1139, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Hurlbut'")[0]['numpeople'] }}],
+          ['Lionel Hall', 42.3751 , -71.1184, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lionel'")[0]['numpeople'] }}],
+          ['Mower Hall', 42.3755 , -71.1182, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mower'")[0]['numpeople'] }}],
+          ['Mass Hall', 42.3744, -71.1183, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mass Hall'")[0]['numpeople'] }}],
+          ['Matthews Hall', 42.3741, -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Matthews'")[0]['numpeople'] }}],
+          ['Stoughton Hall', 42.3754 , -71.1177, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Stoughton'")[0]['numpeople'] }}],
+          ['Straus Hall', 42.3741, -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Straus'")[0]['numpeople'] }}],
+          ['Thayer Hall', 42.3750 , -71.1167, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Thayer'")[0]['numpeople'] }}],
+          ['Weld Hall', 42.3739 , -71.1171, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Weld'")[0]['numpeople'] }}],
+          ['Wigg Hall', 42.3731 , -71.1171, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Wigglesworth'")[0]['numpeople'] }}],
+          ['Adams House', 42.3717 , -71.1167, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Adams'")[0]['numpeople'] }}],
+          ['Cabot House', 42.3812 , -71.1247, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Cabot'")[0]['numpeople'] }}],
+          ['Currier House', 42.3818, -71.1255, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Currier'")[0]['numpeople'] }}],
+          ['Dunster House', 42.3686, -71.1158, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Dunster'")[0]['numpeople'] }}],
+          ['Eliot House', 42.3703, -71.1209, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Eliot'")[0]['numpeople'] }}],
+          ['Kirkland House', 42.3708 , -71.1205, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Kirkland'")[0]['numpeople'] }}],
+          ['Leverett House', 42.3701, -71.1174, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Leverett'")[0]['numpeople'] }}],
+          ['Lowell House', 42.3720 , -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lowell'")[0]['numpeople'] }}],
+          ['Mather House', 42.3686, -71.1153, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mather'")[0]['numpeople'] }}],
+          ['Pforzheimer House', 42.3821 , -71.1248, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Pforzheimer'")[0]['numpeople'] }}],
+          ['Quincy House', 42.3705, -71.1174, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Quincy'")[0]['numpeople'] }}],
+          ['Winthrop House', 42.3702,  -71.1191, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Winthrop'")[0]['numpeople'] }}],
+          ['Cabot Library', 42.3762 , -71.1162, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Cabot'")[0]['numpeople'] }}],
+          ['Law School Library', 42.3780 , -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Langdell Law School Library'")[0]['numpeople'] }}],
+          ['Lamont Library', 42.3727, -71.1155, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lamont'")[0]['numpeople'] }}],
+          ['Widener Library', 42.3734, -71.1165, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Widener'")[0]['numpeople'] }}],
+          ['Capital One Cafe', 42.3727, -71.1197, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Capital One'")[0]['numpeople'] }}],
+          ['Flour Bakery', 42.3730 , -71.1225, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Flour'")[0]['numpeople'] }}],
+          ['Peets Cafe', 42.3726 , -71.1206, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Peets'")[0]['numpeople'] }}],
+          ['Starbucks', 42.3733 , -71.1192, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Starbucks'")[0]['numpeople'] }}],
+          ['Tatte Bakery and Cafe', 42.3727 , -71.1170, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Tatte'")[0]['numpeople'] }}]
         ];
 
         function setMarkers(map, markers) {
@@ -74,7 +73,7 @@
             var lat = markers[i][1]
             var long = markers[i][2]
             var inside = markers[i][0]
-            var num = markers[i][4]
+            var num = markers[i][3]
 
             latlngset = new google.maps.LatLng(lat, long);
             var marker = new google.maps.Marker({
@@ -84,7 +83,7 @@
               title: inside
             });
 
-            var content = inside + num
+            var content = inside + '<br>' + "Number of people: " + num
 
             var infowindow = new google.maps.InfoWindow()
             google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
@@ -122,27 +121,37 @@
 <!-- Replace the value of the key parameter with your own API key. -->
 
 <body onload="initialize()">
-  <nav class="navbar navbar-expand-md navbar-light bg-light border">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/"><span class="blue">Marauder's Map @ Harvard</span>
-            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                {% if userinfo %}
-                    <ul class="navbar-nav mr-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/map">Map</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/check">Check In/Out</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/friends">Find My Friends</a></li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
-                    </ul>
-                {% else %}
-                    <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
-                    </ul>
-                {% endif %}
-            </div>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if userinfo %}
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/map">Map</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/check">Check In/Out</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/friends">Find My Friends</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ml-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ml-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                </ul>
+            {% endif %}
+          </div>
         </nav>
 <div id="default" style="width:100%; height:100%"></div>
 </body>

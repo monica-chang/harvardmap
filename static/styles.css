@@ -67,3 +67,7 @@ table
 .form-group {
     text-align: center;
 }
+
+.navbar-collapse.in {
+    display: block !important;
+}

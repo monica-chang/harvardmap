@@ -134,8 +134,6 @@ def check():
             # Error check to make sure the user does not check into a location twice
             if db.execute("SELECT location FROM users WHERE sub=:sub", sub=userinfo["sub"])[0]['location'] == place:
                 return apology("you have already checked in")
-            elif db.execute("SELECT location FROM users WHERE sub=:sub", sub=userinfo["sub"])[0]['location'] != "Not checked in":
-                return apology("you can't be in multiple places at the same time")
             else:
                 # Update the user's current location in the database
                 db.execute("UPDATE users SET location=:location WHERE sub=:sub", location=place, sub=userinfo["sub"])
