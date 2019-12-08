@@ -1,5 +1,5 @@
 # Harvard Map Project
-CS50 Project 
+
 
 CS50 Project
 Welcome to our project!
