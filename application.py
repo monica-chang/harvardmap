@@ -95,8 +95,17 @@ def logout():
 def map():
     """Show interactive map of where students are on campus Note: potential harry potter theme!!!"""
     # Query for all relevant info for how many students are at each study spot
+    locs = ['Smith Center', 'Apley Court', 'Canaday', 'Grays', 'Greenough', 'Hollis', 'Holworthy', 'Hurlbut', 'Lionel', 'Mower', 'Mass Hall', 'Matthews', 'Pennypacker', 'Stoughton', 'Straus', 'Thayer', 'Weld', 'Wigglesworth', 'Adams', 'Cabot', 'Currier', 'Dunster', 'Eliot', 'Kirkland', 'Leverett', 'Lowell', 'Mather', 'Pforzheimer', 'Quincy', 'Winthrop', 'Cabot', 'Langdell Law School Library','Lamont', 'Widener', 'Capital One', 'Flour', 'Peets', 'Starbucks', 'Tatte']
 
-    return render_template("map2.html", userinfo=session.get("userinfo"), db=SQL("sqlite:///harvardmap.db"))
+    numbers = {}
+    names = {}
+
+    for loc in locs:
+        numbers[loc]=db.execute("SELECT numpeople FROM locations WHERE location=:location", location=loc)[0]['numpeople']
+        rows=db.execute("SELECT name FROM users WHERE location=:location", location=loc)
+        names[loc]=[x['name'] for x in rows]
+
+    return render_template("map2.html", userinfo=session.get("userinfo"), locs=locs, numbers=numbers, names=names)
 
 
 @app.route("/check", methods=["GET", "POST"])
@@ -199,7 +208,7 @@ def friends():
                 return apology("invalid email" , 403)
 
         # Error check: if you already have 10 friends, you can't add anymore
-        if len(db.execute("SELECT  FROM users "))
+        # if len(db.execute("SELECT  FROM users "))
         name = db.execute("SELECT name FROM users WHERE email=:email", email=email)[0]['name']
         db.execute("UPDATE users SET friend1=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
 

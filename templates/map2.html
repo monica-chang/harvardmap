@@ -27,63 +27,49 @@
       var labelIndex = 0;
 
       var markers = [
-          ['Smith Center', 42.3727 , -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Smith Center'")[0]['numpeople'] }}],
-          ['Apley Court', 42.3724, -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Apley Court'")[0]['numpeople'] }}],
-          ['Canaday Hall', 42.3753 , -71.1159, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Canaday'")[0]['numpeople'] }}],
-          ['Grays Hall', 42.3736 , -71.1178, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Grays'")[0]['numpeople'] }}],
-          ['Greenough Hall', 42.3729 , -71.1138, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Greenough'")[0]['numpeople'] }}],
-          ['Hollis Hall', 42.3750, -71.1179, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Hollis'")[0]['numpeople'] }}],
-          ['Holworthy Hall', 42.3755 , -71.1172, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Holworthy'")[0]['numpeople'] }}],
-          ['Hurlbut Hall', 42.3721 , -71.1139, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Hurlbut'")[0]['numpeople'] }}],
-          ['Lionel Hall', 42.3751 , -71.1184, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lionel'")[0]['numpeople'] }}],
-          ['Mower Hall', 42.3755 , -71.1182, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mower'")[0]['numpeople'] }}],
-          ['Mass Hall', 42.3744, -71.1183, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mass Hall'")[0]['numpeople'] }}],
-          ['Matthews Hall', 42.3741, -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Matthews'")[0]['numpeople'] }}],
-          ['Pennypacker Hall', 42.3721, -71.1135, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Pennypacker'")[0]['numpeople'] }}],
-          ['Stoughton Hall', 42.3754 , -71.1177, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Stoughton'")[0]['numpeople'] }}],
-          ['Straus Hall', 42.3741, -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Straus'")[0]['numpeople'] }}],
-          ['Thayer Hall', 42.3750 , -71.1167, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Thayer'")[0]['numpeople'] }}],
-          ['Weld Hall', 42.3739 , -71.1171, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Weld'")[0]['numpeople'] }}],
-          ['Wigg Hall', 42.3731 , -71.1171, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Wigglesworth'")[0]['numpeople'] }}],
-          ['Adams House', 42.3717 , -71.1167, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Adams'")[0]['numpeople'] }}],
-          ['Cabot House', 42.3812 , -71.1247, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Cabot'")[0]['numpeople'] }}],
-          ['Currier House', 42.3818, -71.1255, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Currier'")[0]['numpeople'] }}],
-          ['Dunster House', 42.3686, -71.1158, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Dunster'")[0]['numpeople'] }}],
-          ['Eliot House', 42.3703, -71.1209, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Eliot'")[0]['numpeople'] }}],
-          ['Kirkland House', 42.3708 , -71.1205, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Kirkland'")[0]['numpeople'] }}],
-          ['Leverett House', 42.3701, -71.1174, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Leverett'")[0]['numpeople'] }}],
-          ['Lowell House', 42.3720 , -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lowell'")[0]['numpeople'] }}],
-          ['Mather House', 42.3686, -71.1153, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mather'")[0]['numpeople'] }}],
-          ['Pforzheimer House', 42.3821 , -71.1248, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Pforzheimer'")[0]['numpeople'] }}],
-          ['Quincy House', 42.3705, -71.1174, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Quincy'")[0]['numpeople'] }}],
-          ['Winthrop House', 42.3702,  -71.1191, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Winthrop'")[0]['numpeople'] }}],
-          ['Cabot Library', 42.3762 , -71.1162, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Cabot'")[0]['numpeople'] }}],
-          ['Law School Library', 42.3780 , -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Langdell Law School Library'")[0]['numpeople'] }}],
-          ['Lamont Library', 42.3727, -71.1155, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lamont'")[0]['numpeople'] }}],
-          ['Widener Library', 42.3734, -71.1165, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Widener'")[0]['numpeople'] }}],
-          ['Capital One Cafe', 42.3727, -71.1197, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Capital One'")[0]['numpeople'] }}],
-          ['Flour Bakery', 42.3730 , -71.1225, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Flour'")[0]['numpeople'] }}],
-          ['Peets Cafe', 42.3726 , -71.1206, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Peets'")[0]['numpeople'] }}],
-          ['Starbucks', 42.3733 , -71.1192, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Starbucks'")[0]['numpeople'] }}],
-          ['Tatte Bakery and Cafe', 42.3727 , -71.1170, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Tatte'")[0]['numpeople'] }}]];
+          ['Smith Center', 42.3727 , -71.1186],
+          ['Apley Court', 42.3724, -71.1181],
+          ['Canaday Hall', 42.3753 , -71.1159],
+          ['Grays Hall', 42.3736 , -71.1178],
+          ['Greenough Hall', 42.3729 , -71.1138],
+          ['Hollis Hall', 42.3750, -71.1179],
+          ['Holworthy Hall', 42.3755 , -71.1172],
+          ['Hurlbut Hall', 42.3721 , -71.1139],
+          ['Lionel Hall', 42.3751 , -71.1184],
+          ['Mower Hall', 42.3755 , -71.1182],
+          ['Mass Hall', 42.3744, -71.1183],
+          ['Matthews Hall', 42.3741, -71.1181],
+          ['Pennypacker Hall', 42.3721, -71.1135],
+          ['Stoughton Hall', 42.3754 , -71.1177],
+          ['Straus Hall', 42.3741, -71.1186],
+          ['Thayer Hall', 42.3750 , -71.1167],
+          ['Weld Hall', 42.3739 , -71.1171],
+          ['Wigg Hall', 42.3731 , -71.1171],
+          ['Adams House', 42.3717 , -71.1167],
+          ['Cabot House', 42.3812 , -71.1247],
+          ['Currier House', 42.3818, -71.1255],
+          ['Dunster House', 42.3686, -71.1158],
+          ['Eliot House', 42.3703, -71.1209],
+          ['Kirkland House', 42.3708 , -71.1205],
+          ['Leverett House', 42.3701, -71.1174],
+          ['Lowell House', 42.3720 , -71.1181],
+          ['Mather House', 42.3686, -71.1153],
+          ['Pforzheimer House', 42.3821 , -71.1248],
+          ['Quincy House', 42.3705, -71.1174],
+          ['Winthrop House', 42.3702,  -71.1191],
+          ['Cabot Library', 42.3762 , -71.1162],
+          ['Law School Library', 42.3780 , -71.1186],
+          ['Lamont Library', 42.3727, -71.1155],
+          ['Widener Library', 42.3734, -71.1165],
+          ['Capital One Cafe', 42.3727, -71.1197],
+          ['Flour Bakery', 42.3730 , -71.1225],
+          ['Peets Cafe', 42.3726 , -71.1206],
+          ['Starbucks', 42.3733 , -71.1192],
+          ['Tatte Bakery and Cafe', 42.3727 , -71.1170]];
 
-
-        var numnames = [];
-        var locs=['Smith Center', 'Apley Court', 'Canaday', 'Grays', 'Greenough', 'Hollis', 'Holworthy', 'Hurlbut', 'Lionel', 'Mower',
-                      'Mass Hall', 'Matthews', 'Pennypacker', 'Stoughton', 'Straus', 'Thayer', 'Weld', "Wigglesworth', 'Adams', 'Cabot', 'Currier',
-                      'Dunster', 'Eliot', 'Kirkland', 'Leverett', 'Lowell', 'Mather', 'Pforzheimer', 'Quincy', 'Winthrop', 'Cabot', 'Langdell Law School Library',
-                      'Lamont', 'Widener', 'Capital One', 'Flour', 'Peets', 'Starbucks', 'Tatte'];
-
-        for (i = 0; i < locs.length; i++) {
-          var loc = locs[i];
-          var number = {{ db.execute("SELECT numpeople FROM locations WHERE location=:location", location=loc)[0]['numpeople']) }};
-          var num = [number];
-          numnames[i] = num;
-          for (j = 0; j < number; j++) {
-            var name = {{ db.execute("SELECT name FROM users WHERE location=:location", location=loc)[j]['name']) }};
-            numnames[i].push(name);
-          }
-        }
+        var numbers = {{ numbers | safe }}
+        var names = {{ names | safe }}
+        var locs = {{ locs | safe }}
 
         function setMarkers(map, markers) {
           var marker, i
@@ -91,7 +77,8 @@
             var lat = markers[i][1];
             var long = markers[i][2];
             var inside = markers[i][0];
-            var num = numnames[i][0];
+            var num = numbers[locs[i]];
+            var name = names[locs[i]];
           }
 
             latlngset = new google.maps.LatLng(lat, long);
@@ -102,11 +89,16 @@
               title: inside
             });
 
-           var content = inside + '<br>' + "Number of people: " + num + '<br>' + "People: ";
-
-           for (j = 0; j < numnames.length; j++) {
-             for (k = 1; k < numnames[j].length; k++) {
-                content = content + numnames[j][k];
+           if (name == null)
+           {
+             var content = inside + '<br>' + "Number of people: " + num + '<br>' + "People: ";
+           }
+           else
+           {
+             var content = inside + '<br>' + "Number of people: " + num + '<br>' + "People: ";
+             for(i=0; i<name.length; i++)
+             {
+               content = content + '<br>' + name[i];
              }
            }
 
@@ -118,7 +110,7 @@
                         };
                         })(marker,content,infowindow));
             }
-         }
+
 
         function initialize() {
             var myOptions = {
