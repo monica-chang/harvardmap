@@ -93,22 +93,10 @@ def logout():
 @app.route("/map")
 @login_required
 def map():
-    """Show interactive map of where students are on campus Note: potential harry potter theme!!!"""
-    # Create a list of locations
-    locs = ['Smith Center', 'Apley Court', 'Canaday', 'Grays', 'Greenough', 'Hollis', 'Holworthy', 'Hurlbut', 'Lionel', 'Mower', 'Mass Hall', 'Matthews', 'Pennypacker', 'Stoughton', 'Straus', 'Thayer', 'Weld', 'Wigglesworth', 'Adams', 'Cabot', 'Currier', 'Dunster', 'Eliot', 'Kirkland', 'Leverett', 'Lowell', 'Mather', 'Pforzheimer', 'Quincy', 'Winthrop', 'Cabot', 'Langdell Law School Library','Lamont', 'Widener', 'Capital One', 'Flour', 'Peets', 'Starbucks', 'Tatte']
-    # Create two dictionaries for numbers and names
-    numbers = {}
-    names = {}
-    # For each location, add the number of people and names of people at each location to the respective dictionaries
-    for loc in locs:
-        numbers[loc]=db.execute("SELECT numpeople FROM locations WHERE location=:location", location=loc)[0]['numpeople']
-        rows=db.execute("SELECT name FROM users WHERE location=:location", location=loc)
-        names[loc]=[x['name'] for x in rows]
+    """Show interactive map of where students are on campus"""
 
-    print(numbers)
-    print(names)
 
-    return render_template("map2.html", userinfo=session.get("userinfo"), locs=locs, numbers=numbers, names=names)
+    return render_template("map2.html", userinfo=session.get("userinfo"), db=SQL("sqlite:///harvardmap.db"))
 
 
 @app.route("/check", methods=["GET", "POST"])
