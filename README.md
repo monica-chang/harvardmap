@@ -2,6 +2,7 @@
 
 
 CS50 Project
+
 Welcome to our project!
 
 We created and hosted our project on the CS50 IDE. To compile, configure, and use our project, login to the CS50 IDE and download all of our files, open a terminal window to execute the following: Execute “cd harvardmap” to change into that (i.e. open) that directory. You should see a file called authentication.txt in the harvardmap folder. To set the environment variables necessary for running the CS50 ID (Harvard Key authentication) and the Google Maps API, copy/paste the export commands from authentication.txt and run them in the terminal. Execute “flask run” to start the website and click the provided link, which should be http://f4ee8546-ac3d-440c-94c2-b449f32e03c6-ide.cs50.xyz/.
