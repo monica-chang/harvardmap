@@ -94,12 +94,12 @@ def logout():
 @login_required
 def map():
     """Show interactive map of where students are on campus Note: potential harry potter theme!!!"""
-    # Query for all relevant info for how many students are at each study spot
+    # Create a list of locations
     locs = ['Smith Center', 'Apley Court', 'Canaday', 'Grays', 'Greenough', 'Hollis', 'Holworthy', 'Hurlbut', 'Lionel', 'Mower', 'Mass Hall', 'Matthews', 'Pennypacker', 'Stoughton', 'Straus', 'Thayer', 'Weld', 'Wigglesworth', 'Adams', 'Cabot', 'Currier', 'Dunster', 'Eliot', 'Kirkland', 'Leverett', 'Lowell', 'Mather', 'Pforzheimer', 'Quincy', 'Winthrop', 'Cabot', 'Langdell Law School Library','Lamont', 'Widener', 'Capital One', 'Flour', 'Peets', 'Starbucks', 'Tatte']
-
+    # Create two dictionaries for numbers and names
     numbers = {}
     names = {}
-
+    # For each location, add the number of people and names of people at each location to the respective dictionaries
     for loc in locs:
         numbers[loc]=db.execute("SELECT numpeople FROM locations WHERE location=:location", location=loc)[0]['numpeople']
         rows=db.execute("SELECT name FROM users WHERE location=:location", location=loc)
@@ -207,19 +207,85 @@ def friends():
             if len(rows) != 1:
                 return apology("invalid email" , 403)
 
-        # Error check: if you already have 10 friends, you can't add anymore
-        # if len(db.execute("SELECT  FROM users "))
-        name = db.execute("SELECT name FROM users WHERE email=:email", email=email)[0]['name']
-        db.execute("UPDATE users SET friend1=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+            # Query for the person's name
+            name = db.execute("SELECT name FROM users WHERE email=:email", email=email)[0]['name']
 
+            # Error check: if you already have 10 friends, you can't add anymore
+            if (db.execute("SELECT COUNT(friend10) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend10)'] != 0):
+                return apology ("You cannot follow more than 10 friends", 403)
+            # If you have followed nine friends, add this user as your tenth friend (same logic applies to rest)
+            elif (db.execute("SELECT COUNT(friend9) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend9)'] != 0):
+                db.execute("UPDATE users SET friend10=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
 
+            elif (db.execute("SELECT COUNT(friend8) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend8)'] != 0):
+                db.execute("UPDATE users SET friend9=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
 
+            elif (db.execute("SELECT COUNT(friend7) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend7)'] != 0):
+                db.execute("UPDATE users SET friend8=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+
+            elif (db.execute("SELECT COUNT(friend6) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend6)'] != 0):
+                db.execute("UPDATE users SET friend7=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+
+            elif (db.execute("SELECT COUNT(friend5) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend5)'] != 0):
+                db.execute("UPDATE users SET friend6=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+
+            elif (db.execute("SELECT COUNT(friend4) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend4)'] != 0):
+                db.execute("UPDATE users SET friend5=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+
+            elif (db.execute("SELECT COUNT(friend3) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend3)'] != 0):
+                db.execute("UPDATE users SET friend4=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+
+            elif (db.execute("SELECT COUNT(friend2) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend2)'] != 0):
+                db.execute("UPDATE users SET friend3=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+
+            elif (db.execute("SELECT COUNT(friend1) FROM users WHERE sub=:sub", sub=userinfo['sub'])[0]['COUNT(friend1)'] != 0):
+                db.execute("UPDATE users SET friend2=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
+
+            else:
+                db.execute("UPDATE users SET friend1=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
 
         return redirect("/friends")
 
     else:
         # query to get your friends and their current locations
-        return render_template("friends.html", userinfo=session.get("userinfo"))
+
+        friend1=db.execute("SELECT friend1 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location1=db.execute("SELECT location FROM users WHERE name=:name", name=friend1[0]['friend1'])
+
+        friend2=db.execute("SELECT friend2 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location2=db.execute("SELECT location FROM users WHERE name=:name", name=friend2[0]['friend2'])
+
+        friend3=db.execute("SELECT friend3 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location3=db.execute("SELECT location FROM users WHERE name=:name", name=friend3[0]['friend3'])
+
+        friend4=db.execute("SELECT friend4 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location4=db.execute("SELECT location FROM users WHERE name=:name", name=friend4[0]['friend4'])
+
+        friend5=db.execute("SELECT friend5 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location5=db.execute("SELECT location FROM users WHERE name=:name", name=friend5[0]['friend5'])
+
+        friend6=db.execute("SELECT friend6 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location6=db.execute("SELECT location FROM users WHERE name=:name", name=friend6[0]['friend6'])
+
+        friend7=db.execute("SELECT friend7 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location7=db.execute("SELECT location FROM users WHERE name=:name", name=friend7[0]['friend7'])
+
+        friend8=db.execute("SELECT friend8 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location8=db.execute("SELECT location FROM users WHERE name=:name", name=friend8[0]['friend8'])
+
+        friend9=db.execute("SELECT friend9 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location9=db.execute("SELECT location FROM users WHERE name=:name", name=friend9[0]['friend9'])
+
+        friend10=db.execute("SELECT friend10 FROM users WHERE sub=:sub", sub=userinfo['sub'])
+        location10=db.execute("SELECT location FROM users WHERE name=:name", name=friend10[0]['friend10'])
+
+
+        return render_template("friends.html", userinfo=session.get("userinfo"),
+        friend1=friend1, location1=location1, friend2=friend2, location2=location2,
+        friend3=friend3, location3=location3, friend4=friend4, location4=location4,
+        friend5=friend5, location5=location5, friend6=friend6, location6=location6,
+        friend7=friend7, location7=location7, friend8=friend8, location8=location8,
+        friend9=friend9, location9=location9, friend10=friend10, location10=location10)
 
 
 def errorhandler(e):
