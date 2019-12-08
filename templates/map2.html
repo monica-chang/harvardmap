@@ -72,14 +72,16 @@
         var locs = {{ locs | safe }}
 
         function setMarkers(map, markers) {
-          var marker, i
-          for (i = 0; i < markers.length; i++) {
+
+
+          for (i = 0; i < markers.length; i++)
+          {
             var lat = markers[i][1];
             var long = markers[i][2];
             var inside = markers[i][0];
             var num = numbers[locs[i]];
             var name = names[locs[i]];
-          }
+
 
             latlngset = new google.maps.LatLng(lat, long);
             var marker = new google.maps.Marker({
@@ -102,14 +104,21 @@
              }
            }
 
-            var infowindow = new google.maps.InfoWindow()
-            google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
-                        return function() {
-                        infowindow.setContent(content);
-                        infowindow.open(map,marker);
-                        };
-                        })(marker,content,infowindow));
-            }
+
+           var infowindow = new google.maps.InfoWindow()
+           google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+                return function() {
+                    infowindow.setContent(content);
+                    infowindow.open(map,marker);
+                };
+            })(marker,content,infowindow));
+
+           }
+
+        }
+
+
+
 
 
         function initialize() {
@@ -117,12 +126,12 @@
               center: new google.maps.LatLng(42.3744, -71.1162),
               zoom: 15,
               };
-            var map = new google.maps.Map(document.getElementById("default"),
-              myOptions);
-            setMarkers(map, markers)
+            var map = new google.maps.Map(document.getElementById("default"), myOptions);
+            setMarkers(map, markers);
         }
 
-         google.maps.event.addDomListener(window, 'load', initialize);
+        google.maps.event.addDomListener(window, 'load', initialize);
+
     </script>
 
   <script>

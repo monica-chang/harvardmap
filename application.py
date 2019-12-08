@@ -105,6 +105,9 @@ def map():
         rows=db.execute("SELECT name FROM users WHERE location=:location", location=loc)
         names[loc]=[x['name'] for x in rows]
 
+    print(numbers)
+    print(names)
+
     return render_template("map2.html", userinfo=session.get("userinfo"), locs=locs, numbers=numbers, names=names)
 
 
