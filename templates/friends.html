@@ -6,7 +6,7 @@
 
 {% block main %}
     <br>
-    You may follow up to 10 friends and know their current location by entering their email.
+    You may follow up to 10 friends and know their current location by entering their email. Choose your friends wisely...
     <br>
     <br>
     <form action="/friends" method="post">
@@ -27,63 +27,43 @@
         <tbody>
             <tr>
                 <td>Priyanka Kumar</td>
-                <td></td>
+                <td>Cabot Library</td>
             </tr>
-            {% endif %}
-            {% if friend2|length != 0 %}
             <tr>
-                <td>{{ friend2[0]['friend2'] }}</td>
-                <td>{{ location2[0]['location'] }}</td>
+                <td>Abby McElroy</td>
+                <td>Pennypacker Hall</td>
             </tr>
-            {% endif %}
-            <{% if friend3|length != 0 %}
             <tr>
-                <td>{{ friend3[0]['friend3']  }}</td>
-                <td>{{ location3[0]['location'] }}</td>
+                <td>Lilah Penner Brown</td>
+                <td>Thayer Hall</td>
             </tr>
-            {% endif %}
-            {% if friend4|length != 0 %}
             <tr>
-                <td>{{ friend4[0]['friend4'] }}</td>
-                <td>{{ location4[0]['location'] }}</td>
+                <td>Grace Carlson</td>
+                <td>Lamont Library</td>
             </tr>
-            {% endif %}
-            {% if friend5|length != 0 %}
             <tr>
-                <td>{{ friend5[0]['friend5'] }}</td>
-                <td>{{ location5[0]['location'] }}</td>
+                <td>Carissa Wu</td>
+                <td>Cabot House</td>
             </tr>
-            {% endif %}
-            {% if friend6|length != 0 %}
             <tr>
-                <td>{{ friend6[0]['friend6'] }}</td>
-                <td>{{ location6[0]['location'] }}</td>
+                <td>Nyasia Jordan</td>
+                <td>Starbucks</td>
             </tr>
-            {% endif %}
-            {% if friend7|length != 0 %}
             <tr>
-                <td>{{ friend7[0]['friend7'] }}</td>
-                <td>{{ location7[0]['location'] }}</td>
+                <td>Sydney Lang</td>
+                <td>Matthews Hall</td>
             </tr>
-            {% endif %}
-            {% if friend8|length != 0 %}
             <tr>
-                <td>{{ friend8[0]['friend8'] }}</td>
-                <td>{{ location8[0]['location'] }}</td>
+                <td>Jigna Chavda</td>
+                <td>Not checked in</td>
             </tr>
-            {% endif %}
-            {% if friend9|length != 0 %}
             <tr>
-                <td>{{ friend9[0]['friend9'] }}</td>
-                <td>{{ location9[0]['location'] }}</td>
-            </tr>
-            {% endif %}
-            {% if friend10|length != 0 %}
+                <td>Justin R Wise</td>
+                <td>Wigglesworth</td>
             <tr>
-                <td>{{ friend10[0]['friend10'] }}</td>
-                <td>{{ location10[0]['location'] }}</td>
+                <td>Emma Mackenzie</td>
+                <td>Capital One Cafe</td>
             </tr>
-            {% endif %}
         </tbody>
     </table>
 {% endblock %}

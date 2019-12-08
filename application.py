@@ -94,9 +94,7 @@ def logout():
 @login_required
 def map():
     """Show interactive map of where students are on campus"""
-
-
-    return render_template("map2.html", userinfo=session.get("userinfo"), db=SQL("sqlite:///harvardmap.db"))
+    return render_template("map.html", userinfo=session.get("userinfo"), db=SQL("sqlite:///harvardmap.db"))
 
 
 @app.route("/check", methods=["GET", "POST"])
@@ -235,48 +233,12 @@ def friends():
             else:
                 db.execute("UPDATE users SET friend1=:name WHERE sub=:sub", name=name, sub=userinfo['sub'])
 
-        return redirect("/friends")
+        return redirect("/confirm")
 
     else:
-        # query to get your friends and their current locations
+        # query to get your friends and their current locations - was unable to figure this out
 
-        friend1=db.execute("SELECT friend1 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location1=db.execute("SELECT location FROM users WHERE name=:name", name=friend1[0]['friend1'])
-
-        friend2=db.execute("SELECT friend2 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location2=db.execute("SELECT location FROM users WHERE name=:name", name=friend2[0]['friend2'])
-
-        friend3=db.execute("SELECT friend3 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location3=db.execute("SELECT location FROM users WHERE name=:name", name=friend3[0]['friend3'])
-
-        friend4=db.execute("SELECT friend4 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location4=db.execute("SELECT location FROM users WHERE name=:name", name=friend4[0]['friend4'])
-
-        friend5=db.execute("SELECT friend5 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location5=db.execute("SELECT location FROM users WHERE name=:name", name=friend5[0]['friend5'])
-
-        friend6=db.execute("SELECT friend6 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location6=db.execute("SELECT location FROM users WHERE name=:name", name=friend6[0]['friend6'])
-
-        friend7=db.execute("SELECT friend7 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location7=db.execute("SELECT location FROM users WHERE name=:name", name=friend7[0]['friend7'])
-
-        friend8=db.execute("SELECT friend8 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location8=db.execute("SELECT location FROM users WHERE name=:name", name=friend8[0]['friend8'])
-
-        friend9=db.execute("SELECT friend9 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location9=db.execute("SELECT location FROM users WHERE name=:name", name=friend9[0]['friend9'])
-
-        friend10=db.execute("SELECT friend10 FROM users WHERE sub=:sub", sub=userinfo['sub'])
-        location10=db.execute("SELECT location FROM users WHERE name=:name", name=friend10[0]['friend10'])
-
-
-        return render_template("friends.html", userinfo=session.get("userinfo"),
-        friend1=friend1, location1=location1, friend2=friend2, location2=location2,
-        friend3=friend3, location3=location3, friend4=friend4, location4=location4,
-        friend5=friend5, location5=location5, friend6=friend6, location6=location6,
-        friend7=friend7, location7=location7, friend8=friend8, location8=location8,
-        friend9=friend9, location9=location9, friend10=friend10, location10=location10)
+        return render_template("friends.html", userinfo=session.get("userinfo"))
 
 
 def errorhandler(e):

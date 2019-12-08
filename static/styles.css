@@ -64,10 +64,14 @@ table
     display: block !important;
 }
 
-p, main, h1, .form-group, .form-control {
+p, main, h1, .form-group, .form-control, .navbar-brand, .nav-item {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-style:italic;
     background-color: white;
+}
+
+h1 {
+    font-weight: bold;
 }
 
 body {

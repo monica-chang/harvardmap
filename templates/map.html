@@ -1,123 +1,153 @@
-{% extends "layout.html" %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block title %}
-    Marauder's Map
-{% endblock %}
 
-{% block main %}
-    <div id="map"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNSAKJ7vaGIjrxPdWwC1PyTtl72446D6w"></script>
-
-    <script>
-
+  <title>Marauder's Map: Harvard Edition - Interactive Map</title>
+  <style type="text/css">
+    #map_canvas {
+    height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp-cZG1SpG8R_ScIiLvgDa-rTtMM6B0Eg"></script>
+  <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <script>
       var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
       var labelIndex = 0;
+      var markers = [
+          ['Smith Center', 42.3727 , -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Smith Center'")[0]['numpeople'] }}, ' '],
+          ['Apley Court', 42.3724, -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Apley Court'")[0]['numpeople'] }}, ' '],
+          ['Canaday Hall', 42.3753 , -71.1159, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Canaday'")[0]['numpeople'] }}, ' '],
+          ['Grays Hall', 42.3736 , -71.1178, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Grays'")[0]['numpeople'] }}, ' '],
+          ['Greenough Hall', 42.3729 , -71.1138, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Greenough'")[0]['numpeople'] }}, ' '],
+          ['Hollis Hall', 42.3750, -71.1179, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Hollis'")[0]['numpeople'] }}, ' '],
+          ['Holworthy Hall', 42.3755 , -71.1172, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Holworthy'")[0]['numpeople'] }}, ' '],
+          ['Hurlbut Hall', 42.3721 , -71.1139, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Hurlbut'")[0]['numpeople'] }}, ' '],
+          ['Lionel Hall', 42.3751 , -71.1184, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lionel'")[0]['numpeople'] }}, ' '],
+          ['Mower Hall', 42.3755 , -71.1182, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mower'")[0]['numpeople'] }}, ' '],
+          ['Mass Hall', 42.3744, -71.1183, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mass Hall'")[0]['numpeople'] }}, ' '],
+          ['Matthews Hall', 42.3741, -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Matthews'")[0]['numpeople'] }}, 'Sydney Lang'],
+          ['Pennypacker Hall', 42.3721, -71.1135, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Pennypacker'")[0]['numpeople'] }}, 'Abby McElroy'],
+          ['Stoughton Hall', 42.3754 , -71.1177, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Stoughton'")[0]['numpeople'] }}, ' '],
+          ['Straus Hall', 42.3741, -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Straus'")[0]['numpeople'] }}, ' '],
+          ['Thayer Hall', 42.3750 , -71.1167, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Thayer'")[0]['numpeople'] }}, 'Lilah Penner Brown'],
+          ['Weld Hall', 42.3739 , -71.1171, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Weld'")[0]['numpeople'] }}, ' '],
+          ['Wigg Hall', 42.3731 , -71.1171, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Wigglesworth'")[0]['numpeople'] }}, 'Justin R Wise'],
+          ['Adams House', 42.3717 , -71.1167, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Adams'")[0]['numpeople'] }}, ' '],
+          ['Cabot House', 42.3812 , -71.1247, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Cabot'")[0]['numpeople'] }}, 'Carissa Wu'],
+          ['Currier House', 42.3818, -71.1255, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Currier'")[0]['numpeople'] }}, ' '],
+          ['Dunster House', 42.3686, -71.1158, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Dunster'")[0]['numpeople'] }}, ' '],
+          ['Eliot House', 42.3703, -71.1209, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Eliot'")[0]['numpeople'] }}, ' '],
+          ['Kirkland House', 42.3708 , -71.1205, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Kirkland'")[0]['numpeople'] }}, ' '],
+          ['Leverett House', 42.3701, -71.1174, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Leverett'")[0]['numpeople'] }}, ' '],
+          ['Lowell House', 42.3720 , -71.1181, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lowell'")[0]['numpeople'] }}, ' '],
+          ['Mather House', 42.3686, -71.1153, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Mather'")[0]['numpeople'] }}, ' '],
+          ['Pforzheimer House', 42.3821 , -71.1248, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Pforzheimer'")[0]['numpeople'] }}, ' '],
+          ['Quincy House', 42.3705, -71.1174, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Quincy'")[0]['numpeople'] }}, ' '],
+          ['Winthrop House', 42.3702,  -71.1191, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Winthrop'")[0]['numpeople'] }}, ' '],
+          ['Cabot Library', 42.3762 , -71.1162, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Cabot'")[0]['numpeople'] }}, 'Priyanka Kumar'],
+          ['Law School Library', 42.3780 , -71.1186, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Langdell Law School Library'")[0]['numpeople'] }}, ' '],
+          ['Lamont Library', 42.3727, -71.1155, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Lamont'")[0]['numpeople'] }}, 'Grace Carlson'],
+          ['Widener Library', 42.3734, -71.1165, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Widener'")[0]['numpeople'] }}, ' '],
+          ['Capital One Cafe', 42.3727, -71.1197, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Capital One'")[0]['numpeople'] }}, 'Emma Mackenzie'],
+          ['Flour Bakery', 42.3730 , -71.1225, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Flour'")[0]['numpeople'] }}, ' '],
+          ['Peets Cafe', 42.3726 , -71.1206, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Peets'")[0]['numpeople'] }}, ' '],
+          ['Starbucks', 42.3733 , -71.1192, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Starbucks'")[0]['numpeople'] }}, 'Nyasia Jordan'],
+          ['Tatte Bakery and Cafe', 42.3727 , -71.1170, {{ db.execute("SELECT numpeople FROM locations WHERE location = 'Tatte'")[0]['numpeople'] }}, ' ']];
 
-      function initialize() {
-        var yard = {lat: 42.3744, lng: -71.1162} ;
-
-        var smith = {lat: 42.3727 , lng: -71.1186} ;
-
-        var apley = {lat: 42.3724, lng: -71.1181} ;
-        var canaday = {lat: 42.3753 , lng: -71.1159 } ;
-        var grays = {lat: 42.3736 , lng: -71.1178 } ;
-        var greenough = {lat: 42.3729 , lng: -71.1138 } ;
-        var hollis = {lat: 42.3750, lng: -71.1179} ;
-        var holworthy = {lat: 42.3755 , lng: -71.1172} ;
-        var hurlbut = {lat: 42.3721 , lng: -71.1139} ;
-        var lionel = {lat: 42.3751 , lng: -71.1184} ;
-        var mower = {lat: 42.3755 , lng: -71.1182 } ;
-        var mass = {lat: 42.3744, lng: -71.1183 } ;
-        var matthews = {lat: 42.3741, lng: -71.1181}
-        var stoughton = {lat: 42.3754 , lng: -71.1177} ;
-        var straus = {lat: 42.3741, lng: -71.1186} ;
-        var thayer = {lat: 42.3750 , lng: -71.1167 } ;
-        var weld = {lat: 42.3739 , lng: -71.1171 } ;
-        var wigg = {lat: 42.3731 , lng: -71.1171 } ;
-
-        var adams = {lat: 42.3717 , lng: -71.1167 } ;
-        var cabot = {lat: 42.3812 , lng: -71.1247 } ;
-        var currier = {lat: 42.3818, lng: -71.1255} ;
-        var dunster = {lat: 42.3686, lng: -71.1158} ;
-        var eliot = {lat: 42.3703, lng: -71.1209} ;
-        var kirkland = {lat: 42.3708 , lng: -71.1205 } ;
-        var leverett = {lat: 42.3701, lng: -71.1174} ;
-        var lowell = {lat: 42.3720 , lng: -71.1181 } ;
-        var mather = {lat: 42.3686, lng: -71.1153 } ;
-        var pfoho = {lat: 42.3821 , lng: -71.1248} ;
-        var quincy = {lat: 42.3705, lng: -71.1174 } ;
-        var winthrop = {lat: 42.3702, lng: -71.1191} ;
-
-        var cabotlib = {lat: 42.3762 , lng: -71.1162} ;
-        var law = {lat: 42.3780 , lng: -71.1186} ;
-        var lamont = {lat: 42.3727, lng: -71.1155 } ;
-        var widener = {lat: 42.3734, lng: -71.1165 } ;
-
-        var capital = {lat: 42.3727, lng: -71.1197} ;
-        var flour = {lat: 42.3730 , lng: -71.1225} ;
-        var peets = {lat: 42.3726 , lng: -71.1206 } ;
-        var starbucks = {lat: 42.3733 , lng: -71.1192 } ;
-        var tatte = {lat: 42.3727 , lng: -71.1170} ;
-
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: yard
-        });
-
-
-        // Add a marker at locations of map
-        addMarker(smith, map);
-        addMarker(apley, map);
-        addMarker(canaday, map);
-        addMarker(grays, map);
-        addMarker(greenough, map);
-        addMarker(hollis, map);
-        addMarker(holworthy, map);
-        addMarker(hurlbut, map);
-        addMarker(lionel, map);
-        addMarker(mower, map);
-        addMarker(mass, map);
-        addMarker(matthews, map);
-        addMarker(stoughton, map);
-        addMarker(straus, map);
-        addMarker(thayer, map);
-        addMarker(weld, map);
-        addMarker(wigg, map);
-        addMarker(adams, map);
-        addMarker(cabot, map);
-        addMarker(currier, map);
-        addMarker(dunster, map);
-        addMarker(eliot, map);
-        addMarker(kirkland, map);
-        addMarker(leverett, map);
-        addMarker(lowell, map);
-        addMarker(mather, map);
-        addMarker(pfoho, map);
-        addMarker(quincy, map);
-        addMarker(winthrop, map);
-        addMarker(cabotlib, map);
-        addMarker(law, map);
-        addMarker(lamont, map);
-        addMarker(widener, map);
-        addMarker(capital, map);
-        addMarker(flour, map);
-        addMarker(peets, map);
-        addMarker(starbucks, map);
-        addMarker(tatte, map);
-      }
-
-      // Adds a marker to the map.
-      function addMarker(location, map) {
-        // Add the marker at the clicked location, and add the next-available label
-        // from the array of alphabetical characters.
-        var marker = new google.maps.Marker({
-          position: location,
-          label: labels[labelIndex++ % labels.length],
-          map: map
-        });
-      }
-
-      google.maps.event.addDomListener(window, 'load', initialize);
+        function setMarkers(map, markers) {
+          var marker, i
+          for (i = 0; i < markers.length; i++) {
+            var lat = markers[i][1];
+            var long = markers[i][2];
+            var inside = markers[i][0];
+            var num = markers[i][3];
+            var peeps = markers[i][4]
+            latlngset = new google.maps.LatLng(lat, long);
+            var marker = new google.maps.Marker({
+              position: latlngset,
+              label: labels[i],
+              map: map,
+              title: inside
+            });
+            var content = inside + '<br>' + "Number of people: " + num + '<br>' + "People: " + peeps;
+            var infowindow = new google.maps.InfoWindow()
+            google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+                        return function() {
+                        infowindow.setContent(content);
+                        infowindow.open(map,marker);
+                        };
+                        })(marker,content,infowindow));
+            }
+         }
+        function initialize() {
+            var myOptions = {
+              center: new google.maps.LatLng(42.3744, -71.1162),
+              zoom: 15,
+              };
+            var map = new google.maps.Map(document.getElementById("default"),
+              myOptions);
+            setMarkers(map, markers)
+        }
+         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-{% endblock %}
+
+  <script>
+  $(function() {
+    $( "p" ).text( "The DOM is now loaded and can be manipulated." );
+  });
+  </script>
+
+</head>
+
+<div id="map"></div>
+<!-- Replace the value of the key parameter with your own API key. -->
+
+<body onload="initialize()">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/"><span class="blue">Marauder's Map @ Harvard</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if userinfo %}
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/map">Map</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/check">Check In/Out</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/friends">Find My Friends</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ml-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ml-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                </ul>
+            {% endif %}
+          </div>
+        </nav>
+<div id="default" style="width:100%; height:100%"></div>
+</body>
+
+</html>
