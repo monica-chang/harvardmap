@@ -16,6 +16,7 @@ nav .navbar-brand
     /* size for brand */
     font-size: xx-large;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: bold;
 }
 
 /* colors for brand */

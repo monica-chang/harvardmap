@@ -237,7 +237,6 @@ def friends():
 
     else:
         # query to get your friends and their current locations - was unable to figure this out
-
         return render_template("friends.html", userinfo=session.get("userinfo"))
 
 
